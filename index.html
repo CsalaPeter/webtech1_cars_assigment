@@ -24,17 +24,19 @@
         <td><a href="#" onclick="deleteManufacturer()" class="menuButton">Delete Manufacturer</a></td>
     </tr>
 </table>
+
+
+<div id="description">
+    <p>Welcome!</p>
+    <p>This is a website where you can store your very own cars and you can list them.</p>
+    <p>You can add existing manufacturers to the list and you can list them as well.</p>
+</div>
+
 <table>
     <tr>
         <img src="images/carsbackground.png" class="contentImage">
     </tr>
 </table>
-
-<div id="description">
-    <p>This is a website where you can store your very own cars and you can list them.</p>
-    <p>You can add existing manufacturers to the list and you can list them as well.</p>
-</div>
-
 <div id="listCar">
     <!--The table for car listing-->
 </div>
@@ -47,6 +49,10 @@
     <div id="content">
         <form action="addCar" method="post" id="addCarForm">
             <table>
+                <tr>
+                    <td>ID</td>
+                    <td><input id="textField" type="text" name="id"></td>
+                </tr>
                 <tr>
                     <td>Name</td>
                     <td><input id="textField" type="text" name="name"></td>
@@ -85,7 +91,7 @@
     </div>
 </div>
 
-<div id="Manufactures">
+<div id="addManufacturer">
     <div id="content">
         <form action="addManufacturer" method="post" id="addManufacturerForm">
             <table>
@@ -107,18 +113,7 @@
     </div>
 </div>
 
-<div id="infoPanel">
-    <p class="info">Some info about me:</p>
-
-    <table class="aboutMe">
-        <tr>
-            <td class="me">
-                <li>Name: Csala Péter</li>
-                <li>Neptune code: DAQYMU</li>
-            </td>
-
-        </tr>
-    </table>
+<div id="buttonPart">
     <button id="BtnTop" title="Go to top">Jump to Top</button>
 </div>
 
