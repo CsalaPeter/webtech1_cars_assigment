@@ -1,0 +1,200 @@
+body {
+    background-color: whitesmoke;
+    border: 5px darkblue;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#banner {
+    font-weight: bolder;
+    font-size: 60px;
+    margin-top: -2%;
+    font-family: "cursive", serif;
+    height: 80px;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.home {
+    text-align: center;
+}
+
+#banner .home:HOVER {
+    color: mediumblue;
+    cursor: pointer;
+}
+
+#menuTable {
+    font-size: 25px;
+    float: top;
+    background: transparent;
+    margin-top: 5px;
+}
+
+
+#menuTable .menuButton {
+    width: 212px;
+    color: black;
+    font-weight: bolder;
+    text-decoration-line: none;
+    display: inline-block;
+    text-align: center;
+    border: 6px solid indianred;
+    border-radius: 20px;
+    margin-left: 13%;
+    background: dodgerblue;
+    font-family: "cursive", serif;
+    margin-bottom:20px;
+}
+
+#menuTable .menuButton:HOVER {
+    background: red;
+    color: white;
+}
+
+.contentImage {
+    width: 80%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#description {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    border: 8px solid blue;
+    border-radius: 500px;
+}
+
+p {
+    line-height: 15px; /* within paragraph */
+    margin-bottom: 25px; /* between paragraphs */
+}
+
+#buttonPart {
+    margin-top: 5%;
+}
+
+#toTop {
+    float: right;
+    width: 180px;
+    height: 70px;
+    font-size: larger;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    display: inline-block;
+    margin: 4px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#toTop:hover {
+    background-color: royalblue;
+}
+
+#listTableCar {
+    border: 3px solid black;
+    margin-top: 2%;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#listTableManufacturer  {
+    border: 3px solid black;
+    margin-top: 2%;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.listth {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.listtd {
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.listtdH {
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.listtdH:HOVER {
+    color: red;
+}
+
+#listManufacturers {
+    display: none;
+}
+
+#listCar {
+    display: none;
+}
+
+#addCar {
+    display: none;
+}
+
+#addManufacturer {
+    display: none;
+}
+
+#content {
+    margin: 2% 2% 2% 10%;
+    font-size: 30px;
+}
+
+#submit {
+    width: auto;
+    height: auto;
+    font-size: large;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    float: right;
+}
+
+#textField {
+    width: 250px;
+    height: 30px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-radius: 4px;
+    padding-left: 10px;
+    font-size: medium;
+}
+
+#dropdown {
+    width: 250px;
+    height: 30px;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border: 2px solid red;
+    border-radius: 4px;
+    padding-left: 10px;
+    font-size: medium;
+}
