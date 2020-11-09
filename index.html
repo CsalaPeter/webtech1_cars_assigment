@@ -1,0 +1,125 @@
+<!Doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Car storing website</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="application/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="application/javascript" src="js/index.js"></script>
+</head>
+
+<body>
+
+<div id="banner">
+    <p onclick="toHome()" class="home">Car Storage</p>
+</div>
+
+<table id="menuTable">
+    <tr>
+        <td><a href="#" onclick="addCar()" class="menuButton">Add Car</a></td>
+        <td><a href="#" onclick="listCars()" class="menuButton">List Cars</a></td>
+        <td><a href="#" onclick="deleteCars()" class="menuButton">Delete Car</a></td>
+        <td><a href="#" onclick="addManufacturer()" class="menuButton">Add Manufacturer</a></td>
+        <td><a href="#" onclick="listManufacturers()" class="menuButton">List Manufacturers</a></td>
+        <td><a href="#" onclick="deleteManufacturer()" class="menuButton">Delete Manufacturer</a></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <img src="images/carsbackground.png" class="contentImage">
+    </tr>
+</table>
+
+<div id="description">
+    <p>This is a website where you can store your very own cars and you can list them.</p>
+    <p>You can add existing manufacturers to the list and you can list them as well.</p>
+</div>
+
+<div id="listCar">
+    <!--The table for car listing-->
+</div>
+
+<div id="listManufacturers">
+    <!--The table for manufacturer listing-->
+</div>
+
+<div id="addCar">
+    <div id="content">
+        <form action="addCar" method="post" id="addCarForm">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input id="textField" type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>Consumption</td>
+                    <td><input id="textField" type="text" name="consumption"></td>
+                </tr>
+                <tr>
+                    <td>Color</td>
+                    <td><input id="textField" type="text" name="color"></td>
+                </tr>
+                <tr>
+                    <td>Manufacturer</td>
+                    <td>
+                        <select name="manufacturer" id="dropdown">
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Available</td>
+                    <td><input id="textField" type="number" name="available"></td>
+                </tr>
+                <tr>
+                    <td>Year</td>
+                    <td><input id="textField" type="number" name="year"></td>
+                </tr>
+                <tr>
+                    <td>HorsePower</td>
+                    <td><input id="textField" type="number" name="horsepower"></td>
+                </tr>
+            </table>
+            <input id="submit" type="submit" value="Add Car">
+        </form>
+    </div>
+</div>
+
+<div id="Manufactures">
+    <div id="content">
+        <form action="addManufacturer" method="post" id="addManufacturerForm">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input id="textField" type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td><input id="textField" type="text" name="country"></td>
+                </tr>
+                <tr>
+                    <td>Founded</td>
+                    <td><input id="textField" type="date" name="founded"></td>
+                </tr>
+            </table>
+            <input id="submit" type="submit" value="Add Manufacturer">
+        </form>
+    </div>
+</div>
+
+<div id="infoPanel">
+    <p class="info">Some info about me:</p>
+
+    <table class="aboutMe">
+        <tr>
+            <td class="me">
+                <li>Name: Csala Péter</li>
+                <li>Neptune code: DAQYMU</li>
+            </td>
+
+        </tr>
+    </table>
+    <button id="BtnTop" title="Go to top">Jump to Top</button>
+</div>
+
+</body>
