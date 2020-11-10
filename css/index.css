@@ -15,7 +15,7 @@ table {
     height: 80px;
     width: fit-content;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: 220px;
 }
 
 .home {
@@ -27,39 +27,38 @@ table {
     cursor: pointer;
 }
 
-#menuTable {
+
+.sidenav {
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: lightslategray;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
     font-size: 25px;
-    float: top;
-    background: transparent;
-    margin-top: 5px;
-}
-
-
-#menuTable .menuButton {
-    width: 212px;
     color: black;
-    font-weight: bolder;
-    text-decoration-line: none;
-    display: inline-block;
-    text-align: center;
-    border: 6px solid indianred;
-    border-radius: 20px;
-    margin-left: 13%;
-    background: dodgerblue;
-    font-family: "cursive", serif;
-    margin-bottom:20px;
+    display: block;
 }
 
-#menuTable .menuButton:HOVER {
-    background: red;
-    color: white;
+
+.sidenav a:hover {
+    color: #f1f1f1;
 }
+
 
 .contentImage {
     width: 80%;
     height: auto;
     display: block;
-    margin-left: auto;
+    margin-left: 220px;
     margin-right: auto;
 }
 
@@ -71,6 +70,7 @@ table {
     font-family: "Times New Roman", Times, serif;
     border: 8px solid blue;
     border-radius: 500px;
+    margin-left: 220px;
 }
 
 p {
