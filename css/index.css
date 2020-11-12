@@ -143,18 +143,22 @@ p {
 
 #listManufacturers {
     display: none;
+    margin-left: 220px;
 }
 
 #listCar {
     display: none;
+    margin-left: 220px;
 }
 
 #addCar {
     display: none;
+    margin-left: 220px;
 }
 
 #addManufacturer {
     display: none;
+    margin-left: 220px;
 }
 
 #content {
