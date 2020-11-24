@@ -120,13 +120,20 @@ function addCar() {
 
     removeOptions(document.getElementById("dropdown"));
 
-    $.getJSON('https://webtechcars.herokuapp.com/api/manufacturers', function (data) {
-        var count = 0;
-        var $dropdown = $("#dropdown");
-        $.each(data, function () {
-            $dropdown.append($("<option />").val(data[count]).text(data[count]));
-            count = count + 1;
-        });
+
+    let dropdown = $('#dropdown');
+
+    dropdown.empty();
+
+    dropdown.append('<option selected="true" disabled>Choose Manufacturer</option>');
+    dropdown.prop('selectedIndex', 0);
+
+    const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
+
+    $.getJSON(url, function (data) {
+        $.each(data, function (key, entry) {
+            dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
+        })
     });
 }
 
