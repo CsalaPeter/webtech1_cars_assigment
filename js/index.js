@@ -20,7 +20,7 @@ $(function() {
 
     $('#addManufacturerForm').on("submit", function (e) {
         e.preventDefault();
-        const manufacturerArr = $('form').serializeArray();
+        const manufacturerArr = $('form');
         const manufacturer = {
             name: manufacturerArr[0].value,
             country: manufacturerArr[1].value,
@@ -29,7 +29,7 @@ $(function() {
         $.ajax({
             type: 'post',
             url: 'https://webtechcars.herokuapp.com/api/manufacturers',
-            data: $(JSON.stringify(manufacturer)),
+            data: JSON.stringify(manufacturer).serializeArray(),
             dataType: "json",
             contentType: "application/json",
             success: function () {
