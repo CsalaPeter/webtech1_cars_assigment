@@ -1,15 +1,11 @@
 $(function() {
 
-    $("#toTop").trigger("click")(function () {
-        $('html, body').animate({scrollTop: 0}, 'medium');
-    });
-
 
     $('#addCarForm').on("submit", function (e) {
         e.preventDefault();
         $.ajax({
             type: 'post',
-            url: `https://webtechcars.herokuapp.com/api/cars`,
+            url: 'https://webtechcars.herokuapp.com/api/cars',
             data: $("#addCarForm").serialize(),
             success: function () {
                 listCars();
@@ -22,13 +18,20 @@ $(function() {
 
 
 
-
     $('#addManufacturerForm').on("submit", function (e) {
         e.preventDefault();
+        const manufacturerArr = $('form').serializeArray();
+        const manufacturer = {
+            name: manufacturerArr[0].value,
+            country: manufacturerArr[1].value,
+            founded: manufacturerArr[2].value
+        };
         $.ajax({
             type: 'post',
-            url: `https://webtechcars.herokuapp.com/api/manufacturers`,
-            data: $("#addManufacturerForm").serialize(),
+            url: 'https://webtechcars.herokuapp.com/api/manufacturers',
+            data: $(JSON.stringify(manufacturer)),
+            dataType: "json",
+            contentType: "application/json",
             success: function () {
                 listManufacturers();
             },
@@ -68,7 +71,7 @@ function listCars() {
             var consumptionCell = $('<td class="listtd">' + value.consumption +'</td>');
             var colorCell = $('<td class="listtd">' + value.color + '</td>');
             var manufacturerCell = $('<td class="listtdH">' + value.manufacturer +' </td>');
-            var availableCell = $('<td class="listtd">' + value.available + '</td>');
+            var availableCell = $('<td class="listtd">' + value.avaiable + '</td>');
             var yearCell = $('<td class="listtd">' + value.year + '</td>');
             var horsepowerCell = $('<td class="listtd">' + value.horsepower + '</td>');
             row.append(nameCell);
