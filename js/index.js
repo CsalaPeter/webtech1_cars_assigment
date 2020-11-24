@@ -22,6 +22,7 @@ $(function() {
 
 
 
+
     $('#addManufacturerForm').on("submit", function (e) {
         e.preventDefault();
         $.ajax({
@@ -119,7 +120,7 @@ function addCar() {
 
     removeOptions(document.getElementById("dropdown"));
 
-    $.get('manufacturerNames', function (data) {
+    $.getJSON('https://webtechcars.herokuapp.com/api/manufacturers', function (data) {
         var count = 0;
         var $dropdown = $("#dropdown");
         $.each(data, function () {
