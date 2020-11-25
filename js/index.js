@@ -6,9 +6,20 @@ $(function() {
         $.ajax({
             type: 'post',
             url: 'https://webtechcars.herokuapp.com/api/cars',
-            data: $("#addCarForm").serialize(),
+            data: JSON.stringify({
+                name: $("#addCarName").val(),
+                consumption: $("#addConsumption").val(),
+                color: $("#addColor").val(),
+                manufacturer: $("#dropdown").val(),
+                avaiable: $("#addAvailable").val(),
+                year: $("#addYear").val(),
+                horsepower: $("#addHorsepower").val()
+
+            }),
+            dataType: "json",
+            contentType: "application/json",
             success: function () {
-                listCars();
+                alert("Car added to the database!");
             },
             error: function () {
                 alert("Something went wrong!");
@@ -18,22 +29,21 @@ $(function() {
 
 
 
-    $('#addManufacturerForm').on("submit", function (e) {
-        e.preventDefault();
-        const manufacturerArr = $('form');
-        const manufacturer = {
-            name: manufacturerArr[0].value,
-            country: manufacturerArr[1].value,
-            founded: manufacturerArr[2].value
-        };
+    $('#addManufacturerForm').on("submit", function (submit) {
+        submit.preventDefault();
+
         $.ajax({
             type: 'post',
             url: 'https://webtechcars.herokuapp.com/api/manufacturers',
-            data: JSON.stringify(manufacturer).serializeArray(),
+            data: JSON.stringify({
+                name: $("#addName").val(),
+                country: $("#addCountry").val(),
+                founded: $("#addFounded").val()
+            }),
             dataType: "json",
             contentType: "application/json",
             success: function () {
-                listManufacturers();
+                alert("Car added to the database!");
             },
             error: function () {
                 alert("Something went wrong!");
@@ -147,6 +157,7 @@ function addManufacturer() {
     $("#listCar").fadeOut(0);
     $("#addCar").fadeOut(0);
     $("#addManufacturer").fadeIn(700);
+
 }
 
 
