@@ -1,6 +1,5 @@
 $(function() {
 
-
     $('#addCarForm').on("submit", function (e) {
         e.preventDefault();
         $.ajax({
@@ -18,9 +17,7 @@ $(function() {
             }),
             dataType: "json",
             contentType: "application/json",
-            success: function () {
-                alert("Car added to the database!");
-            },
+            success: function () {},
             error: function () {
                 alert("Something went wrong!");
             }
@@ -28,9 +25,8 @@ $(function() {
     });
 
 
-
-    $('#addManufacturerForm').on("submit", function (submit) {
-        submit.preventDefault();
+    $('#addManufacturerForm').on("submit", function (e) {
+        e.preventDefault();
 
         $.ajax({
             type: 'post',
@@ -53,14 +49,14 @@ $(function() {
 
 });
 
-    function toHome() {
-        $("#description").fadeIn(900);
-        $(".contentImage").fadeIn(900);
-        $("#listManufacturers").fadeOut(1);
-        $("#listCar").fadeOut(1);
-        $("#addCar").fadeOut(1);
-        $("#addManufacturer").fadeOut(1);
-    }
+function toHome() {
+    $("#description").fadeIn(900);
+    $(".contentImage").fadeIn(900);
+    $("#listManufacturers").fadeOut(1);
+    $("#listCar").fadeOut(1);
+    $("#addCar").fadeOut(1);
+    $("#addManufacturer").fadeOut(1);
+}
 
 function listCars() {
 
@@ -73,17 +69,19 @@ function listCars() {
 
 
     $.getJSON(`https://webtechcars.herokuapp.com/api/cars`, function (data) {
-        var table = $('<table id="listTableCar"></table>');
-        table.append('<tr><th class="listth">Name</th><th class="listth">Consumption</th><th class="listth">Color</th><th class="listth">Manufacturer</th><th class="listth">Available</th><th class="listth">Year</th><th class="listth">Horsepower</th></tr>');
+        let table = $('<table id="listTableCar"></table>');
+        table.append('<tr><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Consumption</th><th class="listth">Color</th><th class="listth">Manufacturer</th><th class="listth">Available</th><th class="listth">Year</th><th class="listth">Horsepower</th></tr>');
         $.each(data, function (key, value) {
-            var row = $('<tr></tr>');
-            var nameCell = $('<td class="listtd">' + value.name + '</td>');
-            var consumptionCell = $('<td class="listtd">' + value.consumption +'</td>');
-            var colorCell = $('<td class="listtd">' + value.color + '</td>');
-            var manufacturerCell = $('<td class="listtdH">' + value.manufacturer +' </td>');
-            var availableCell = $('<td class="listtd">' + value.avaiable + '</td>');
-            var yearCell = $('<td class="listtd">' + value.year + '</td>');
-            var horsepowerCell = $('<td class="listtd">' + value.horsepower + '</td>');
+            let row = $('<tr></tr>');
+            let delButton = $('<td class="listtd"><button value="Delete" onclick="deleteCar('+value.id+')"></td>');
+            let nameCell = $('<td class="listtd">' + value.name + '</td>');
+            let consumptionCell = $('<td class="listtd">' + value.consumption +'</td>');
+            let colorCell = $('<td class="listtd">' + value.color + '</td>');
+            let manufacturerCell = $('<td class="listtdH">' + value.manufacturer +' </td>');
+            let availableCell = $('<td class="listtd">' + value.avaiable + '</td>');
+            let yearCell = $('<td class="listtd">' + value.year + '</td>');
+            let horsepowerCell = $('<td class="listtd">' + value.horsepower + '</td>');
+            row.append(delButton);
             row.append(nameCell);
             row.append(consumptionCell);
             row.append(colorCell);
@@ -98,6 +96,16 @@ function listCars() {
 
 }
 
+function deleteCar (id) {
+    $.ajax({
+        url: `https://webtechcars.herokuapp.com/api/cars/${id}`,
+        type: 'DELETE',
+        dataType: "json",
+        contentType: "application/json"
+    });
+}
+
+
 function listManufacturers() {
     $("#description").fadeOut(700);
     $(".contentImage").fadeOut(700);
@@ -107,13 +115,13 @@ function listManufacturers() {
     $("#addManufacturer").fadeOut(0);
 
     $.getJSON("https://webtechcars.herokuapp.com/api/manufacturers", function (data) {
-        var table = $('<table id="listTableManufacturers"></table>');
+        let table = $('<table id="listTableManufacturers"></table>');
         table.append('<tr><th class="listth">Name</th><th class="listth">Country</th><th class="listth">Founded</th></tr>');
         $.each(data, function (key, value) {
-            var row = $('<tr></tr>');
-            var nameCell = $('<td class="listtdH">' + value.name + '</td>');
-            var countryCell = $('<td class="listtd">' + value.country + '</td>');
-            var foundedCell = $('<td class="listtd">' + value.founded + '</td>');
+            let row = $('<tr></tr>');
+            let nameCell = $('<td class="listtdH">' + value.name + '</td>');
+            let countryCell = $('<td class="listtd">' + value.country + '</td>');
+            let foundedCell = $('<td class="listtd">' + value.founded + '</td>');
             row.append(nameCell);
             row.append(countryCell);
             row.append(foundedCell);
@@ -138,7 +146,7 @@ function addCar() {
 
     dropdown.empty();
 
-    dropdown.append('<option selected="true" disabled>Choose Manufacturer</option>');
+    dropdown.append('<option  disabled>Choose Manufacturer</option>');
     dropdown.prop('selectedIndex', 0);
 
     const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
@@ -162,7 +170,7 @@ function addManufacturer() {
 
 
 function removeOptions(selectbox) {
-    var i;
+    let i;
     for (i = selectbox.options.length - 1; i >= 0; i--) {
         selectbox.remove(i);
     }
