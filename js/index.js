@@ -15,9 +15,10 @@ $(function() {
                 horsepower: $("#addHorsepower").val()
 
             }),
-            dataType: "json",
             contentType: "application/json",
-            success: function () {},
+            success: function () {
+                alert("Car added to the database!");
+            },
             error: function () {
                 alert("Something went wrong!");
             }
@@ -36,10 +37,9 @@ $(function() {
                 country: $("#addCountry").val(),
                 founded: $("#addFounded").val()
             }),
-            dataType: "json",
             contentType: "application/json",
             success: function () {
-                alert("Car added to the database!");
+                alert("Manufacturer added to the database!");
             },
             error: function () {
                 alert("Something went wrong!");
@@ -100,7 +100,6 @@ function deleteCar (id) {
     $.ajax({
         url: `https://webtechcars.herokuapp.com/api/cars/${id}`,
         type: 'DELETE',
-        dataType: "json",
         contentType: "application/json"
     });
 }
