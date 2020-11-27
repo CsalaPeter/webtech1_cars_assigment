@@ -25,7 +25,6 @@ $(function() {
         })
     });
 
-
     $('#addManufacturerForm').on("submit", function (e) {
         e.preventDefault();
 
@@ -70,10 +69,11 @@ function listCars() {
 
     $.getJSON(`https://webtechcars.herokuapp.com/api/cars`, function (data) {
         let table = $('<table id="listTableCar"></table>');
-        table.append('<tr><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Consumption</th><th class="listth">Color</th><th class="listth">Manufacturer</th><th class="listth">Available</th><th class="listth">Year</th><th class="listth">Horsepower</th></tr>');
+        table.append('<tr><th class="listth">Modify</th><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Consumption</th><th class="listth">Color</th><th class="listth">Manufacturer</th><th class="listth">Available</th><th class="listth">Year</th><th class="listth">Horsepower</th></tr>');
         $.each(data, function (key, value) {
             let row = $('<tr></tr>');
             let delButton = $('<td class="listtd"><button value="Delete" onclick="deleteCar(\''+value._id+'\')"></td>');
+            let modButton = $('<td class="listtd"><button value="Modify" onclick="modifyCar(\''+value._id+'\')"></td>');
             let nameCell = $('<td class="listtd">' + value.name + '</td>');
             let consumptionCell = $('<td class="listtd">' + value.consumption +'</td>');
             let colorCell = $('<td class="listtd">' + value.color + '</td>');
@@ -81,6 +81,7 @@ function listCars() {
             let availableCell = $('<td class="listtd">' + value.avaiable + '</td>');
             let yearCell = $('<td class="listtd">' + value.year + '</td>');
             let horsepowerCell = $('<td class="listtd">' + value.horsepower + '</td>');
+            row.append(modButton);
             row.append(delButton);
             row.append(nameCell);
             row.append(consumptionCell);
@@ -110,6 +111,20 @@ function deleteCar (id) {
     });
 }
 
+function modifyCar(id, form) {
+    $.ajax({
+        url: `https://webtechcars.herokuapp.com/api/cars/`+id,
+        type: 'DELETE',
+        contentType: "application/json",
+        success: function () {
+            addCar(form);
+        },
+        error: function () {
+            alert("Something went wrong!");
+        }
+    });
+}
+
 
 function listManufacturers() {
     $("#description").fadeOut(700);
@@ -121,13 +136,15 @@ function listManufacturers() {
 
     $.getJSON("https://webtechcars.herokuapp.com/api/manufacturers", function (data) {
         let table = $('<table id="listTableManufacturers"></table>');
-        table.append('<tr><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Country</th><th class="listth">Founded</th></tr>');
+        table.append('<tr><th class="listth">Modify</th><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Country</th><th class="listth">Founded</th></tr>');
         $.each(data, function (key, value) {
             let row = $('<tr></tr>');
             let delButton = $('<td class="listtd"><button value="Delete" onclick="deleteManufacturer(\''+value._id+'\')"></td>');
+            let modButton = $('<td class="listtd"><button value="Modify" onclick="modifyManufacturer(\''+value._id+'\')"></td>');
             let nameCell = $('<td class="listtdH">' + value.name + '</td>');
             let countryCell = $('<td class="listtd">' + value.country + '</td>');
             let foundedCell = $('<td class="listtd">' + value.founded + '</td>');
+            row.append(modButton);
             row.append(delButton);
             row.append(nameCell);
             row.append(countryCell);
@@ -145,6 +162,20 @@ function deleteManufacturer (id) {
         contentType: "application/json",
         success: function () {
             listManufacturers();
+        },
+        error: function () {
+            alert("Something went wrong!");
+        }
+    });
+}
+
+function modifyManufacturer(id, form) {
+    $.ajax({
+        url: `https://webtechcars.herokuapp.com/api/Manufacturers/`+id,
+        type: 'DELETE',
+        contentType: "application/json",
+        success: function () {
+            addManufacturer(form);
         },
         error: function () {
             alert("Something went wrong!");
