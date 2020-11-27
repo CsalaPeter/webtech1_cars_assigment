@@ -73,7 +73,7 @@ function listCars() {
         table.append('<tr><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Consumption</th><th class="listth">Color</th><th class="listth">Manufacturer</th><th class="listth">Available</th><th class="listth">Year</th><th class="listth">Horsepower</th></tr>');
         $.each(data, function (key, value) {
             let row = $('<tr></tr>');
-            let delButton = $('<td class="listtd"><button value="Delete" onclick="deleteCar('+value.id+')"></td>');
+            let delButton = $('<td class="listtd"><button value="Delete" onclick="deleteCar(\''+value._id+'\')"></td>');
             let nameCell = $('<td class="listtd">' + value.name + '</td>');
             let consumptionCell = $('<td class="listtd">' + value.consumption +'</td>');
             let colorCell = $('<td class="listtd">' + value.color + '</td>');
@@ -98,9 +98,15 @@ function listCars() {
 
 function deleteCar (id) {
     $.ajax({
-        url: `https://webtechcars.herokuapp.com/api/cars/${id}`,
+        url: `https://webtechcars.herokuapp.com/api/cars/`+id,
         type: 'DELETE',
-        contentType: "application/json"
+        contentType: "application/json",
+        success: function () {
+            listCars();
+        },
+        error: function () {
+            alert("Something went wrong!");
+        }
     });
 }
 
@@ -115,18 +121,34 @@ function listManufacturers() {
 
     $.getJSON("https://webtechcars.herokuapp.com/api/manufacturers", function (data) {
         let table = $('<table id="listTableManufacturers"></table>');
-        table.append('<tr><th class="listth">Name</th><th class="listth">Country</th><th class="listth">Founded</th></tr>');
+        table.append('<tr><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Country</th><th class="listth">Founded</th></tr>');
         $.each(data, function (key, value) {
             let row = $('<tr></tr>');
+            let delButton = $('<td class="listtd"><button value="Delete" onclick="deleteManufacturer(\''+value._id+'\')"></td>');
             let nameCell = $('<td class="listtdH">' + value.name + '</td>');
             let countryCell = $('<td class="listtd">' + value.country + '</td>');
             let foundedCell = $('<td class="listtd">' + value.founded + '</td>');
+            row.append(delButton);
             row.append(nameCell);
             row.append(countryCell);
             row.append(foundedCell);
             table.append(row)
         });
         $('#listManufacturers').html(table);
+    });
+}
+
+function deleteManufacturer (id) {
+    $.ajax({
+        url: `https://webtechcars.herokuapp.com/api/manufacturers/`+id,
+        type: 'DELETE',
+        contentType: "application/json",
+        success: function () {
+            listManufacturers();
+        },
+        error: function () {
+            alert("Something went wrong!");
+        }
     });
 }
 
@@ -144,12 +166,9 @@ function addCar() {
     let dropdown = $('#dropdown');
 
     dropdown.empty();
-
     dropdown.append('<option  disabled>Choose Manufacturer</option>');
     dropdown.prop('selectedIndex', 0);
-
     const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
-
     $.getJSON(url, function (data) {
         $.each(data, function (key, entry) {
             dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
