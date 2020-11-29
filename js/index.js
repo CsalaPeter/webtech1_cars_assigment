@@ -169,18 +169,23 @@ function deleteManufacturer (id) {
     });
 }
 
-function modifyManufacturer(id, form) {
+function fillField(id){
     $.ajax({
-        url: `https://webtechcars.herokuapp.com/api/Manufacturers/`+id,
-        type: 'DELETE',
-        contentType: "application/json",
-        success: function () {
-            addManufacturer(form);
-        },
-        error: function () {
-            alert("Something went wrong!");
+        type: 'POST',
+        url: "https://webtechcars.herokuapp.com/api/manufacturers/"+id,
+        data: {id : $("#id").val()},
+        success: function(){
+            $("#name").val("name");
+            $("#country").val("country");
+            $("#founded").val("founded");
         }
     });
+}
+
+
+async function modifyManufacturer(id, form) {
+    await fillField(id)
+    await addManufacturer(form)
 }
 
 function addCar() {
