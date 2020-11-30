@@ -156,7 +156,17 @@ p {
     margin-left: 220px;
 }
 
+#modCar {
+    display: none;
+    margin-left: 220px;
+}
+
 #addManufacturer {
+    display: none;
+    margin-left: 220px;
+}
+
+#modManufacturer {
     display: none;
     margin-left: 220px;
 }
@@ -167,6 +177,20 @@ p {
 }
 
 #submit {
+    width: auto;
+    height: auto;
+    font-size: large;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    float: right;
+}
+
+#modify {
     width: auto;
     height: auto;
     font-size: large;

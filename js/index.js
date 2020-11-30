@@ -25,6 +25,31 @@ $(function() {
         })
     });
 
+    $('#modCarForm').on("submit", function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: 'https://webtechcars.herokuapp.com/api/cars',
+            data: JSON.stringify({
+                name: $("#modCarName").val(),
+                consumption: $("#modConsumption").val(),
+                color: $("#modColor").val(),
+                manufacturer: $("#moddropdown").val(),
+                avaiable: $("#modAvailable").val(),
+                year: $("#modYear").val(),
+                horsepower: $("#modHorsepower").val()
+
+            }),
+            contentType: "application/json",
+            success: function () {
+                deleteCar(id)
+            },
+            error: function () {
+                alert("Something went wrong!");
+            }
+        })
+    });
+
     $('#addManufacturerForm').on("submit", function (e) {
         e.preventDefault();
 
@@ -46,6 +71,28 @@ $(function() {
         })
     });
 
+    $('#modifyManufacturerForm').on("submit", function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'post',
+            url: 'https://webtechcars.herokuapp.com/api/manufacturers',
+            data: JSON.stringify({
+                name: $("#modName").val(),
+                country: $("#modCountry").val(),
+                founded: $("#modFounded").val()
+            }),
+            contentType: "application/json",
+            success: function () {
+                deleteManufacturer(id)
+            },
+            error: function () {
+                alert("Something went wrong!");
+            }
+        })
+    });
+
+
 });
 
 function toHome() {
@@ -55,6 +102,8 @@ function toHome() {
     $("#listCar").fadeOut(1);
     $("#addCar").fadeOut(1);
     $("#addManufacturer").fadeOut(1);
+    $("#modManufacturer").fadeOut(1);
+    $("#modCar").fadeOut(1);
 }
 
 function listCars() {
@@ -65,6 +114,8 @@ function listCars() {
     $("#listManufacturers").fadeOut(0);
     $("#addCar").fadeOut(0);
     $("#addManufacturer").fadeOut(0);
+    $("#modManufacturer").fadeOut(700);
+    $("#modCar").fadeOut(700);
 
 
     $.getJSON(`https://webtechcars.herokuapp.com/api/cars`, function (data) {
@@ -72,8 +123,8 @@ function listCars() {
         table.append('<tr><th class="listth">Modify</th><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Consumption</th><th class="listth">Color</th><th class="listth">Manufacturer</th><th class="listth">Available</th><th class="listth">Year</th><th class="listth">Horsepower</th></tr>');
         $.each(data, function (key, value) {
             let row = $('<tr></tr>');
-            let delButton = $('<td class="listtd"><button value="Delete" onclick="deleteCar(\''+value._id+'\')"></td>');
-            let modButton = $('<td class="listtd"><button value="Modify" onclick="modifyCar(\''+value._id+'\')"></td>');
+            let delButton = $('<td class="listtd"><button onclick="deleteCar(\''+value._id+'\')">Delete</button></td>');
+            let modButton = $("<td class='listtd'><button onclick='modifyCar("+JSON.stringify(value)+")'>Modify</button></td>");
             let nameCell = $('<td class="listtd">' + value.name + '</td>');
             let consumptionCell = $('<td class="listtd">' + value.consumption +'</td>');
             let colorCell = $('<td class="listtd">' + value.color + '</td>');
@@ -111,20 +162,29 @@ function deleteCar (id) {
     });
 }
 
-function modifyCar(id, form) {
-    $.ajax({
-        url: `https://webtechcars.herokuapp.com/api/cars/`+id,
-        type: 'DELETE',
-        contentType: "application/json",
-        success: function () {
-            addCar(form);
-        },
-        error: function () {
-            alert("Something went wrong!");
-        }
+function modifyCar(car){
+    modCar()
+    $('#modCarForm #modID').val(car._id)
+    $('#modCarForm #modCarName').val(car.name)
+    $('#modCarForm #modConsumption').val(car.consumption)
+    $('#modCarForm #modColor').val(car.color)
+    $('#modCarForm #modManufacturer').val(car.manufacturer)
+    $('#modCarForm #modAvailable').val(car.avaiable)
+    $('#modCarForm #modYear').val(car.year)
+    $('#modCarForm #modHorsepower').val(car.horsepower)
+
+    let dropdown = $('#moddropdown');
+
+    dropdown.empty();
+    dropdown.append('<option  disabled>Choose Manufacturer</option>');
+    dropdown.prop('selectedIndex', 0);
+    const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
+    $.getJSON(url, function (data) {
+        $.each(data, function (key, entry) {
+            dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
+        })
     });
 }
-
 
 function listManufacturers() {
     $("#description").fadeOut(700);
@@ -133,14 +193,16 @@ function listManufacturers() {
     $("#listCar").fadeOut(0);
     $("#addCar").fadeOut(0);
     $("#addManufacturer").fadeOut(0);
+    $("#modManufacturer").fadeOut(700);
+    $("#modCar").fadeOut(700);
 
     $.getJSON("https://webtechcars.herokuapp.com/api/manufacturers", function (data) {
         let table = $('<table id="listTableManufacturers"></table>');
         table.append('<tr><th class="listth">Modify</th><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Country</th><th class="listth">Founded</th></tr>');
         $.each(data, function (key, value) {
             let row = $('<tr></tr>');
-            let delButton = $('<td class="listtd"><button value="Delete" onclick="deleteManufacturer(\''+value._id+'\')"></td>');
-            let modButton = $('<td class="listtd"><button value="Modify" onclick="modifyManufacturer(\''+value._id+'\')"></td>');
+            let delButton = $('<td class="listtd"><button onclick="deleteManufacturer(\''+value._id+'\')">Delete</button></td>');
+            let modButton = $("<td class='listtd'><button onclick='modifyManufacturer("+JSON.stringify(value)+")'>Modify</button></td>");
             let nameCell = $('<td class="listtdH">' + value.name + '</td>');
             let countryCell = $('<td class="listtd">' + value.country + '</td>');
             let foundedCell = $('<td class="listtd">' + value.founded + '</td>');
@@ -167,25 +229,14 @@ function deleteManufacturer (id) {
             alert("Something went wrong!");
         }
     });
+
 }
 
-function fillField(id){
-    $.ajax({
-        type: 'POST',
-        url: "https://webtechcars.herokuapp.com/api/manufacturers/"+id,
-        data: {id : $("#id").val()},
-        success: function(){
-            $("#name").val("name");
-            $("#country").val("country");
-            $("#founded").val("founded");
-        }
-    });
-}
-
-
-async function modifyManufacturer(id, form) {
-    await fillField(id)
-    await addManufacturer(form)
+function modifyManufacturer(manuf){
+    modManufacturer()
+    $('#modManufacturerForm #modName').val(manuf.name)
+    $('#modManufacturerForm #modCountry').val(manuf.country)
+    $('#modManufacturerForm #modFounded').val(manuf.founded)
 }
 
 function addCar() {
@@ -195,8 +246,8 @@ function addCar() {
     $("#listCar").fadeOut(0);
     $("#addCar").fadeIn(700);
     $("#addManufacturer").fadeOut(0);
-
-    removeOptions(document.getElementById("dropdown"));
+    $("#modManufacturer").fadeOut(700);
+    $("#modCar").fadeOut(700);
 
 
     let dropdown = $('#dropdown');
@@ -212,6 +263,19 @@ function addCar() {
     });
 }
 
+function modCar() {
+    $("#description").fadeOut(700);
+    $(".contentImage").fadeOut(700);
+    $("#listManufacturers").fadeOut(0);
+    $("#listCar").fadeOut(0);
+    $("#addCar").fadeOut(0);
+    $("#modManufacturer").fadeOut(700);
+    $("#addManufacturer").fadeOut(700);
+    $("#modCar").fadeIn(700);
+
+}
+
+
 function addManufacturer() {
     $("#description").fadeOut(700);
     $(".contentImage").fadeOut(700);
@@ -219,15 +283,24 @@ function addManufacturer() {
     $("#listCar").fadeOut(0);
     $("#addCar").fadeOut(0);
     $("#addManufacturer").fadeIn(700);
+    $("#modManufacturer").fadeOut(700);
+    $("#modCar").fadeOut(700);
+
+}
+
+function modManufacturer() {
+    $("#description").fadeOut(700);
+    $(".contentImage").fadeOut(700);
+    $("#listManufacturers").fadeOut(0);
+    $("#listCar").fadeOut(0);
+    $("#addCar").fadeOut(0);
+    $("#modManufacturer").fadeIn(700);
+    $("#addManufacturer").fadeOut(700);
+    $("#modCar").fadeOut(700);
 
 }
 
 
-function removeOptions(selectbox) {
-    let i;
-    for (i = selectbox.options.length - 1; i >= 0; i--) {
-        selectbox.remove(i);
-    }
-}
+
 
 

@@ -83,6 +83,52 @@
     </div>
 </div>
 
+<div id="modCar">
+    <div id="carcontent">
+        <form action="modCar" method="post" id="modCarForm">
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td><input id="modCarID" type="text" name="_id"></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input id="modCarName" type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>Consumption</td>
+                    <td><input id="modConsumption" type="text" name="consumption"></td>
+                </tr>
+                <tr>
+                    <td>Color</td>
+                    <td><input id="modColor" type="text" name="color"></td>
+                </tr>
+                <tr>
+                    <td>Manufacturer</td>
+                    <td>
+                        <select name="manufacturer" id="moddropdown">
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Available</td>
+                    <td><input id="modAvailable" type="text" name="avaiable"></td>
+                </tr>
+                <tr>
+                    <td>Year</td>
+                    <td><input id="modYear" type="text" name="year"></td>
+                </tr>
+                <tr>
+                    <td>HorsePower</td>
+                    <td><input id="modHorsepower" type="text" name="horsepower"></td>
+                </tr>
+            </table>
+            <input id="modify" type="submit" value="Modify Car">
+        </form>
+    </div>
+</div>
+
 <div id="addManufacturer">
     <div id="manucontent">
         <form action="addManufacturer" method="post" id="addManufacturerForm">
@@ -105,7 +151,26 @@
     </div>
 </div>
 
-<div id="buttonPart">
-    <button id="toTop" title="Go to top">Jump to Top</button>
+<div id="modManufacturer">
+    <div id="manufmodcontent">
+        <form action="modManufacturer" method="post" id="modManufacturerForm">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input id="modName" type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td><input id="modCountry" type="text" name="country"></td>
+                </tr>
+                <tr>
+                    <td>Founded</td>
+                    <td><input id="modFounded" type="text" name="founded"></td>
+                </tr>
+            </table>
+            <input id="modify" type="submit" value="Modify Manufacturer">
+        </form>
+    </div>
 </div>
+
 </body>
