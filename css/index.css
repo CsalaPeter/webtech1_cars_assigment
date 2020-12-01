@@ -218,9 +218,18 @@ p {
 #dropdown {
     width: 250px;
     height: 30px;
-    margin-left: 10px;
     box-sizing: border-box;
-    border: 2px solid red;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding-left: 10px;
+    font-size: medium;
+}
+
+#moddropdown {
+    width: 250px;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid black;
     border-radius: 4px;
     padding-left: 10px;
     font-size: medium;

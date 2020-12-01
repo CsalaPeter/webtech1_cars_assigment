@@ -71,7 +71,7 @@ $(function() {
         })
     });
 
-    $('#modifyManufacturerForm').on("submit", function (e) {
+    $('#modManufacturerForm').on("submit", function (e) {
         e.preventDefault();
 
         $.ajax({
@@ -105,6 +105,8 @@ function toHome() {
     $("#modManufacturer").fadeOut(1);
     $("#modCar").fadeOut(1);
 }
+
+<!-- ----------Car functions!---------- -->
 
 function listCars() {
 
@@ -148,6 +150,42 @@ function listCars() {
 
 }
 
+function addCar() {
+    $("#description").fadeOut(700);
+    $(".contentImage").fadeOut(700);
+    $("#listManufacturers").fadeOut(0);
+    $("#listCar").fadeOut(0);
+    $("#addCar").fadeIn(700);
+    $("#addManufacturer").fadeOut(0);
+    $("#modManufacturer").fadeOut(700);
+    $("#modCar").fadeOut(700);
+
+
+    let dropdown = $('#dropdown');
+
+    dropdown.empty();
+    dropdown.append('<option  disabled>Choose Manufacturer</option>');
+    dropdown.prop('selectedIndex', 0);
+    const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
+    $.getJSON(url, function (data) {
+        $.each(data, function (key, entry) {
+            dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
+        })
+    });
+}
+
+function modCar() {
+    $("#description").fadeOut(700);
+    $(".contentImage").fadeOut(700);
+    $("#listManufacturers").fadeOut(0);
+    $("#listCar").fadeOut(0);
+    $("#addCar").fadeOut(0);
+    $("#modManufacturer").fadeOut(700);
+    $("#addManufacturer").fadeOut(700);
+    $("#modCar").fadeIn(700);
+
+}
+
 function deleteCar (id) {
     $.ajax({
         url: `https://webtechcars.herokuapp.com/api/cars/`+id,
@@ -175,7 +213,6 @@ function modifyCar(car){
 
     let dropdown = $('#moddropdown');
 
-    dropdown.empty();
     dropdown.append('<option  disabled>Choose Manufacturer</option>');
     dropdown.prop('selectedIndex', 0);
     const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
@@ -185,6 +222,8 @@ function modifyCar(car){
         })
     });
 }
+
+<!-- ----------Manufacturer functions!---------- -->
 
 function listManufacturers() {
     $("#description").fadeOut(700);
@@ -238,43 +277,6 @@ function modifyManufacturer(manuf){
     $('#modManufacturerForm #modCountry').val(manuf.country)
     $('#modManufacturerForm #modFounded').val(manuf.founded)
 }
-
-function addCar() {
-    $("#description").fadeOut(700);
-    $(".contentImage").fadeOut(700);
-    $("#listManufacturers").fadeOut(0);
-    $("#listCar").fadeOut(0);
-    $("#addCar").fadeIn(700);
-    $("#addManufacturer").fadeOut(0);
-    $("#modManufacturer").fadeOut(700);
-    $("#modCar").fadeOut(700);
-
-
-    let dropdown = $('#dropdown');
-
-    dropdown.empty();
-    dropdown.append('<option  disabled>Choose Manufacturer</option>');
-    dropdown.prop('selectedIndex', 0);
-    const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
-    $.getJSON(url, function (data) {
-        $.each(data, function (key, entry) {
-            dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
-        })
-    });
-}
-
-function modCar() {
-    $("#description").fadeOut(700);
-    $(".contentImage").fadeOut(700);
-    $("#listManufacturers").fadeOut(0);
-    $("#listCar").fadeOut(0);
-    $("#addCar").fadeOut(0);
-    $("#modManufacturer").fadeOut(700);
-    $("#addManufacturer").fadeOut(700);
-    $("#modCar").fadeIn(700);
-
-}
-
 
 function addManufacturer() {
     $("#description").fadeOut(700);
