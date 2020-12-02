@@ -136,10 +136,6 @@ p {
     cursor: pointer;
 }
 
-.listtdH:HOVER {
-    color: red;
-}
-
 #listManufacturers {
     display: none;
     margin-left: 220px;

@@ -135,7 +135,7 @@ function listCars() {
             let nameCell = $('<td class="listtd">' + value.name + '</td>');
             let consumptionCell = $('<td class="listtd">' + value.consumption +'</td>');
             let colorCell = $('<td class="listtd">' + value.color + '</td>');
-            let manufacturerCell = $('<td class="listtdH">' + value.manufacturer +' </td>');
+            let manufacturerCell = $('<td class="listtd">' + value.manufacturer +' </td>');
             let availableCell = $('<td class="listtd">' + value.avaiable + '</td>');
             let yearCell = $('<td class="listtd">' + value.year + '</td>');
             let horsepowerCell = $('<td class="listtd">' + value.horsepower + '</td>');
@@ -171,7 +171,6 @@ function addCar() {
 
     dropdown.empty();
     dropdown.append('<option  disabled>Choose Manufacturer</option>');
-    dropdown.prop('selectedIndex', 0);
     const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
     $.getJSON(url, function (data) {
         $.each(data, function (key, entry) {
@@ -218,14 +217,24 @@ function modifyCar(car){
     $('#modCarForm #modHorsepower').val(car.horsepower)
 
     let dropdown = $('#moddropdown');
+    let manuf = [];
 
-    dropdown.append ($('<option></option>').attr('selected', 'selected'));
-    dropdown.prop('selectedIndex', 0);
+    $('#moddropdown option').remove();
+    dropdown.append('<option value="0" disabled>Choose Manufacturer</option>');
+
     const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
     $.getJSON(url, function (data) {
         $.each(data, function (key, entry) {
             dropdown.append($('<option></option>').attr('value', entry._id).text(entry.name));
         })
+        manuf = data;
+    }).then(function (){
+        dropdown.val(0);
+        for (let i in manuf) {
+            if (manuf[i].name === car.manufacturer) {
+                dropdown.val(manuf[i]._id);
+            }
+        }
     });
 }
 
@@ -248,8 +257,8 @@ function listManufacturers() {
             let row = $('<tr></tr>');
             let delButton = $('<td class="listtd"><button onclick="deleteManufacturer(\''+value._id+'\')">Delete</button></td>');
             let modButton = $("<td class='listtd'><button onclick='modifyManufacturer("+JSON.stringify(value)+")'>Modify</button></td>");
-            let idCell = $('<td class="listtdH">' + value._id + '</td>');
-            let nameCell = $('<td class="listtdH">' + value.name + '</td>');
+            let idCell = $('<td class="listtd">' + value._id + '</td>');
+            let nameCell = $('<td class="listtd">' + value.name + '</td>');
             let countryCell = $('<td class="listtd">' + value.country + ' </td> ');
             let foundedCell = $('<td class="listtd">' + value.founded + ' </td>');
             row.append(modButton);
@@ -310,7 +319,6 @@ function modManufacturer() {
     $("#modCar").fadeOut(700);
 
 }
-
 
 
 
