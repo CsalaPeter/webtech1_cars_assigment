@@ -17,7 +17,7 @@ $(function() {
             }),
             contentType: "application/json",
             success: function () {
-                alert("Car added to the database!");
+                listCars()
             },
             error: function () {
                 alert("Something went wrong!");
@@ -31,6 +31,7 @@ $(function() {
             type: 'post',
             url: 'https://webtechcars.herokuapp.com/api/cars',
             data: JSON.stringify({
+                id: $("#modCarID").val(),
                 name: $("#modCarName").val(),
                 consumption: $("#modConsumption").val(),
                 color: $("#modColor").val(),
@@ -42,7 +43,8 @@ $(function() {
             }),
             contentType: "application/json",
             success: function () {
-                deleteCar(id)
+                deleteCar($("#modCarID").val())
+                listCars()
             },
             error: function () {
                 alert("Something went wrong!");
@@ -63,7 +65,7 @@ $(function() {
             }),
             contentType: "application/json",
             success: function () {
-                alert("Manufacturer added to the database!");
+                listManufacturers()
             },
             error: function () {
                 alert("Something went wrong!");
@@ -78,13 +80,15 @@ $(function() {
             type: 'post',
             url: 'https://webtechcars.herokuapp.com/api/manufacturers',
             data: JSON.stringify({
+                id: $("#modId").val(),
                 name: $("#modName").val(),
                 country: $("#modCountry").val(),
                 founded: $("#modFounded").val()
             }),
             contentType: "application/json",
             success: function () {
-                deleteManufacturer(id)
+                deleteManufacturer($("#modId").val())
+                listManufacturers()
             },
             error: function () {
                 alert("Something went wrong!");
@@ -122,11 +126,12 @@ function listCars() {
 
     $.getJSON(`https://webtechcars.herokuapp.com/api/cars`, function (data) {
         let table = $('<table id="listTableCar"></table>');
-        table.append('<tr><th class="listth">Modify</th><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Consumption</th><th class="listth">Color</th><th class="listth">Manufacturer</th><th class="listth">Available</th><th class="listth">Year</th><th class="listth">Horsepower</th></tr>');
+        table.append('<tr><th class="listth">Modify</th><th class="listth">Delete</th><th class="listth">ID</th><th class="listth">Name</th><th class="listth">Consumption</th><th class="listth">Color</th><th class="listth">Manufacturer</th><th class="listth">Available</th><th class="listth">Year</th><th class="listth">Horsepower</th></tr>');
         $.each(data, function (key, value) {
             let row = $('<tr></tr>');
             let delButton = $('<td class="listtd"><button onclick="deleteCar(\''+value._id+'\')">Delete</button></td>');
             let modButton = $("<td class='listtd'><button onclick='modifyCar("+JSON.stringify(value)+")'>Modify</button></td>");
+            let idCell = $('<td class="listtd">' +value._id+ '</td>');
             let nameCell = $('<td class="listtd">' + value.name + '</td>');
             let consumptionCell = $('<td class="listtd">' + value.consumption +'</td>');
             let colorCell = $('<td class="listtd">' + value.color + '</td>');
@@ -136,6 +141,7 @@ function listCars() {
             let horsepowerCell = $('<td class="listtd">' + value.horsepower + '</td>');
             row.append(modButton);
             row.append(delButton);
+            row.append(idCell);
             row.append(nameCell);
             row.append(consumptionCell);
             row.append(colorCell);
@@ -202,7 +208,7 @@ function deleteCar (id) {
 
 function modifyCar(car){
     modCar()
-    $('#modCarForm #modID').val(car._id)
+    $('#modCarForm #modCarID').val(car._id)
     $('#modCarForm #modCarName').val(car.name)
     $('#modCarForm #modConsumption').val(car.consumption)
     $('#modCarForm #modColor').val(car.color)
@@ -213,12 +219,12 @@ function modifyCar(car){
 
     let dropdown = $('#moddropdown');
 
-    dropdown.append('<option  disabled>Choose Manufacturer</option>');
+    dropdown.append ($('<option></option>').attr('selected', 'selected'));
     dropdown.prop('selectedIndex', 0);
     const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
     $.getJSON(url, function (data) {
         $.each(data, function (key, entry) {
-            dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
+            dropdown.append($('<option></option>').attr('value', entry._id).text(entry.name));
         })
     });
 }
@@ -237,16 +243,18 @@ function listManufacturers() {
 
     $.getJSON("https://webtechcars.herokuapp.com/api/manufacturers", function (data) {
         let table = $('<table id="listTableManufacturers"></table>');
-        table.append('<tr><th class="listth">Modify</th><th class="listth">Delete</th><th class="listth">Name</th><th class="listth">Country</th><th class="listth">Founded</th></tr>');
+        table.append('<tr><th class="listth">Modify</th><th class="listth">Delete</th><th class="listth">ID</th><th class="listth">Name</th><th class="listth">Country</th><th class="listth">Founded</th></tr>');
         $.each(data, function (key, value) {
             let row = $('<tr></tr>');
             let delButton = $('<td class="listtd"><button onclick="deleteManufacturer(\''+value._id+'\')">Delete</button></td>');
             let modButton = $("<td class='listtd'><button onclick='modifyManufacturer("+JSON.stringify(value)+")'>Modify</button></td>");
+            let idCell = $('<td class="listtdH">' + value._id + '</td>');
             let nameCell = $('<td class="listtdH">' + value.name + '</td>');
-            let countryCell = $('<td class="listtd">' + value.country + '</td>');
-            let foundedCell = $('<td class="listtd">' + value.founded + '</td>');
+            let countryCell = $('<td class="listtd">' + value.country + ' </td> ');
+            let foundedCell = $('<td class="listtd">' + value.founded + ' </td>');
             row.append(modButton);
             row.append(delButton);
+            row.append(idCell);
             row.append(nameCell);
             row.append(countryCell);
             row.append(foundedCell);
@@ -273,6 +281,7 @@ function deleteManufacturer (id) {
 
 function modifyManufacturer(manuf){
     modManufacturer()
+    $('#modManufacturerForm #modId').val(manuf._id)
     $('#modManufacturerForm #modName').val(manuf.name)
     $('#modManufacturerForm #modCountry').val(manuf.country)
     $('#modManufacturerForm #modFounded').val(manuf.founded)
