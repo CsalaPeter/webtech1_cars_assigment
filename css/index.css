@@ -77,10 +77,6 @@ p {
     margin-bottom: 25px; /* between paragraphs */
 }
 
-#buttonPart {
-    margin-top: 5%;
-}
-
 #toTop {
     float: right;
     width: 180px;
@@ -129,12 +125,6 @@ p {
     border: 1px solid black;
 }
 
-.listtdH {
-    font-size: 20px;
-    text-align: center;
-    border: 1px solid black;
-    cursor: pointer;
-}
 
 #listManufacturers {
     display: none;
@@ -191,7 +181,7 @@ p {
     font-size: large;
     background-color: red;
     border: none;
-    color: white;
+    color: whitesmoke;
     padding: 15px 32px;
     display: inline-block;
     cursor: pointer;

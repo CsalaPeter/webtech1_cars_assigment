@@ -120,8 +120,8 @@ function listCars() {
     $("#listManufacturers").fadeOut(0);
     $("#addCar").fadeOut(0);
     $("#addManufacturer").fadeOut(0);
-    $("#modManufacturer").fadeOut(700);
-    $("#modCar").fadeOut(700);
+    $("#modManufacturer").fadeOut(0);
+    $("#modCar").fadeOut(0);
 
 
     $.getJSON(`https://webtechcars.herokuapp.com/api/cars`, function (data) {
@@ -163,14 +163,15 @@ function addCar() {
     $("#listCar").fadeOut(0);
     $("#addCar").fadeIn(700);
     $("#addManufacturer").fadeOut(0);
-    $("#modManufacturer").fadeOut(700);
-    $("#modCar").fadeOut(700);
+    $("#modManufacturer").fadeOut(0);
+    $("#modCar").fadeOut(0);
 
 
     let dropdown = $('#dropdown');
 
     dropdown.empty();
     dropdown.append('<option  disabled>Choose Manufacturer</option>');
+    dropdown.prop('selectedIndex', 0);
     const url = 'https://webtechcars.herokuapp.com/api/manufacturers';
     $.getJSON(url, function (data) {
         $.each(data, function (key, entry) {
@@ -185,8 +186,8 @@ function modCar() {
     $("#listManufacturers").fadeOut(0);
     $("#listCar").fadeOut(0);
     $("#addCar").fadeOut(0);
-    $("#modManufacturer").fadeOut(700);
-    $("#addManufacturer").fadeOut(700);
+    $("#modManufacturer").fadeOut(0);
+    $("#addManufacturer").fadeOut(0);
     $("#modCar").fadeIn(700);
 
 }
@@ -247,8 +248,8 @@ function listManufacturers() {
     $("#listCar").fadeOut(0);
     $("#addCar").fadeOut(0);
     $("#addManufacturer").fadeOut(0);
-    $("#modManufacturer").fadeOut(700);
-    $("#modCar").fadeOut(700);
+    $("#modManufacturer").fadeOut(0);
+    $("#modCar").fadeOut(0);
 
     $.getJSON("https://webtechcars.herokuapp.com/api/manufacturers", function (data) {
         let table = $('<table id="listTableManufacturers"></table>');
@@ -303,8 +304,8 @@ function addManufacturer() {
     $("#listCar").fadeOut(0);
     $("#addCar").fadeOut(0);
     $("#addManufacturer").fadeIn(700);
-    $("#modManufacturer").fadeOut(700);
-    $("#modCar").fadeOut(700);
+    $("#modManufacturer").fadeOut(0);
+    $("#modCar").fadeOut(0);
 
 }
 
@@ -315,8 +316,8 @@ function modManufacturer() {
     $("#listCar").fadeOut(0);
     $("#addCar").fadeOut(0);
     $("#modManufacturer").fadeIn(700);
-    $("#addManufacturer").fadeOut(700);
-    $("#modCar").fadeOut(700);
+    $("#addManufacturer").fadeOut(0);
+    $("#modCar").fadeOut(0);
 
 }
 
