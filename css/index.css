@@ -77,25 +77,6 @@ p {
     margin-bottom: 25px; /* between paragraphs */
 }
 
-#toTop {
-    float: right;
-    width: 180px;
-    height: 70px;
-    font-size: larger;
-    background-color: red;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    display: inline-block;
-    margin: 4px 5px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#toTop:hover {
-    background-color: royalblue;
-}
-
 #listTableCar {
     border: 3px solid black;
     margin-top: 2%;
