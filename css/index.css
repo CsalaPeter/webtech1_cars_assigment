@@ -77,15 +77,7 @@ p {
     margin-bottom: 25px; /* between paragraphs */
 }
 
-#listTableCar {
-    border: 3px solid black;
-    margin-top: 2%;
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#listTableManufacturer  {
+#listTableCar #listTableManufacturer {
     border: 3px solid black;
     margin-top: 2%;
     width: 75%;
@@ -106,63 +98,24 @@ p {
     border: 1px solid black;
 }
 
-
-#listManufacturers {
+#listCar #addCar #modCar #listManufacturers #addManufacturer #modManufacturer  {
     display: none;
     margin-left: 220px;
 }
 
-#listCar {
-    display: none;
-    margin-left: 220px;
-}
-
-#addCar {
-    display: none;
-    margin-left: 220px;
-}
-
-#modCar {
-    display: none;
-    margin-left: 220px;
-}
-
-#addManufacturer {
-    display: none;
-    margin-left: 220px;
-}
-
-#modManufacturer {
-    display: none;
-    margin-left: 220px;
-}
 
 #content {
     margin: 2% 2% 2% 10%;
     font-size: 30px;
 }
 
-#submit {
+#submit #modify {
     width: auto;
     height: auto;
     font-size: large;
     background-color: red;
     border: none;
     color: white;
-    padding: 15px 32px;
-    display: inline-block;
-    cursor: pointer;
-    border-radius: 5px;
-    float: right;
-}
-
-#modify {
-    width: auto;
-    height: auto;
-    font-size: large;
-    background-color: red;
-    border: none;
-    color: whitesmoke;
     padding: 15px 32px;
     display: inline-block;
     cursor: pointer;
@@ -181,7 +134,7 @@ p {
     font-size: medium;
 }
 
-#dropdown {
+#dropdown #moddropdown {
     width: 250px;
     height: 30px;
     box-sizing: border-box;
@@ -191,12 +144,3 @@ p {
     font-size: medium;
 }
 
-#moddropdown {
-    width: 250px;
-    height: 30px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 4px;
-    padding-left: 10px;
-    font-size: medium;
-}
