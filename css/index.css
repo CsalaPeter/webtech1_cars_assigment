@@ -77,7 +77,7 @@ p {
     margin-bottom: 25px; /* between paragraphs */
 }
 
-#listTableCar #listTableManufacturer {
+#listTableCar, #listTableManufacturer {
     border: 3px solid black;
     margin-top: 2%;
     width: 75%;
@@ -98,18 +98,17 @@ p {
     border: 1px solid black;
 }
 
-#listCar #addCar #modCar #listManufacturers #addManufacturer #modManufacturer  {
+#listCar, #listManufacturers, #addCar, #addManufacturer, #modCar, #modManufacturer{
     display: none;
     margin-left: 220px;
 }
-
 
 #content {
     margin: 2% 2% 2% 10%;
     font-size: 30px;
 }
 
-#submit #modify {
+#submit, #modify {
     width: auto;
     height: auto;
     font-size: large;
@@ -134,7 +133,7 @@ p {
     font-size: medium;
 }
 
-#dropdown #moddropdown {
+#dropdown, #moddropdown {
     width: 250px;
     height: 30px;
     box-sizing: border-box;
